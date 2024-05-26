@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS # type: ignore
-import os 
 
 app = Flask(__name__)
 CORS(app)  
@@ -125,6 +124,5 @@ def delete_superheroe(id):
     return ('', 204)
 
 
-port = int(os.environ.get('PORT', 33507))
 if __name__ == '__main__':
     app.run(debug=True,port=33507)
