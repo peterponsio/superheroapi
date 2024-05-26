@@ -64,7 +64,7 @@ superheroes = [
   },
   {
     "createdAt": "2024-05-25T15:55:05.714Z",
-    "name": "Thor",
+    "name": "thor",
     "avatar": "https://i.pinimg.com/236x/a0/89/dd/a089ddc424309d43a14a1ee50af42dbe.jpg",
     "power": "Dios",
     "height": 1.93,
@@ -103,7 +103,7 @@ def get_superheroe(id):
 @app.route('/superheroes', methods=['POST'])
 def create_superheroe():
     new_heroe = request.json
-    new_heroe["id"] = max(heroe["id"] for heroe in superheroes) + 1
+    new_heroe["id"] = max(heroe["id"] for heroe in superheroes)
     superheroes.append(new_heroe)
     return jsonify(new_heroe), 201
 
