@@ -140,7 +140,7 @@ def edit_superhero():
     if not updated_superhero:
         return jsonify({"error": "No hay campos para actualizar"}), 400
 
-    result = superheroes_collection.update_one(
+    result = superheroes.update_one(
         {"_id": ObjectId(id)},
         {"$set": updated_superhero}
     )
