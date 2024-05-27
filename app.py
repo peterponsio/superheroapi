@@ -120,7 +120,7 @@ def update_superheroe(id):
         data = request.json
         heroe.update(data)
         response = jsonify(heroe)
-        return 'update ok', 200, {'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'PUT'}
+        return response
     return ('', 404)
 
 # Ruta para borrar un superhéroe
