@@ -3,7 +3,7 @@ from flask_cors import CORS, cross_origin # type: ignore
 import os
 
 app = Flask(__name__)
-CORS(app, support_credentials=True)  
+CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
 superheroes = [
   {
@@ -113,7 +113,7 @@ def create_superheroe():
 
 # Ruta para actualizar un superhéroe existente
 @app.route('/superheroes/<int:id>', methods=['PUT'])
-@cross_origin(supports_credentials=True)
+@cross_origin(origin='localhost',headers=['Content- Type'])
 def update_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
     if heroe:
