@@ -115,6 +115,7 @@ def create_superheroe():
 @app.route('/superheroes/edit', methods=['POST'])
 def edit_superhero():
     data = request.json
+    createdAt = data.get('createdAt')
     id = data.get('id')
     name = data.get('name')
     power = data.get('power')
@@ -133,6 +134,8 @@ def edit_superhero():
         updated_superhero['height'] = height
     if avatar:
         updated_superhero['avatar'] = avatar
+    if createdAt:
+        updated_superhero['createdAt'] = createdAt
 
     if not updated_superhero:
         return jsonify({"error": "No hay campos para actualizar"}), 400
