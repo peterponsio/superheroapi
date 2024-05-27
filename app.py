@@ -3,7 +3,7 @@ from flask_cors import CORS # type: ignore
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/superheroes": {"origins": "http://localhost:4200"}})
+CORS(app, origins=["http://localhost:4200","*"])
 
 superheroes = [
   {
