@@ -4,7 +4,6 @@ import os
 
 app = Flask(__name__)
 CORS(app, support_credentials=True))  
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 superheroes = [
   {
@@ -92,7 +91,9 @@ superheroes = [
 # Ruta para obtener todos los superhéroes
 @app.route('/superheroes', methods=['GET'])
 def get_superheroes():
-    return jsonify(superheroes)
+    response = jsonify(superheroes)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 # Ruta para obtener un superhéroe por ID
 @app.route('/superheroes/<int:id>', methods=['GET'])
@@ -106,7 +107,9 @@ def create_superheroe():
     new_heroe = request.json
     new_heroe["id"] = max(heroe["id"] for heroe in superheroes)
     superheroes.append(new_heroe)
-    return jsonify(new_heroe), 201
+    response = jsonify(new_heroe)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 201
 
 # Ruta para actualizar un superhéroe existente
 @app.route('/superheroes/<int:id>', methods=['PUT'])
@@ -116,7 +119,9 @@ def update_superheroe(id):
     if heroe:
         data = request.json
         heroe.update(data)
-        return jsonify(heroe)
+        response = jsonify(heroe)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     return ('', 404)
 
 # Ruta para borrar un superhéroe
