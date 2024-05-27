@@ -89,9 +89,6 @@ superheroes = [
   }
 ]
 
-@app.route("/")
-@cross_origin()
-
 # Ruta para obtener todos los superhéroes
 @app.route('/superheroes', methods=['GET'])
 def get_superheroes():
@@ -113,6 +110,7 @@ def create_superheroe():
 
 # Ruta para actualizar un superhéroe existente
 @app.route('/superheroes/<int:id>', methods=['PUT'])
+@cross_origin()
 def update_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
     if heroe:
