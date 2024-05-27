@@ -113,8 +113,6 @@ def create_superheroe():
 
 # Ruta para actualizar un superhéroe existente
 @app.route('/superheroes/<int:id>', methods=['PUT','OPTIONS'])
-#@cross_origin(origin='localhost',headers=['Content-Type'])
-@crossdomain(origin='*')
 def update_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
     if heroe:
