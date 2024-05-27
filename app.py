@@ -128,33 +128,6 @@ def edit_superhero():
         heroe.update(data)
         return jsonify(heroe)
     return ('', 404)
-    #if not id:
-     #   return jsonify({"error": "ID del superhéroe es requerido"}), 400
-
-    #updated_superhero = {}
-    #if name:
-     #   updated_superhero['name'] = name
-    #if power:
-     #   updated_superhero['power'] = power
-    #if height:
-     #   updated_superhero['height'] = height
-    #if avatar:
-     #   updated_superhero['avatar'] = avatar
-    #if createdAt:
-      #  updated_superhero['createdAt'] = createdAt
-
-    #if not updated_superhero:
-      #  return jsonify({"error": "No hay campos para actualizar"}), 400
-
-    #result = superheroes.update_one(
-      #  {"_id": ObjectId(id)},
-     #   {"$set": updated_superhero}
-    #)
-
-    #if result.matched_count == 0:
-        #return jsonify({"error": "Superhéroe no encontrado"}), 404
-
-    #return jsonify({"msg": "Superhéroe actualizado correctamente"}), 200
 
 # Ruta para borrar un superhéroe
 @app.route('/superheroes/<int:id>', methods=['DELETE'])
