@@ -107,7 +107,6 @@ def get_superhero(id):
 @app.route('/superheroes', methods=['POST'])
 def create_superheroe():
     new_heroe = request.json
-    new_heroe["id"] = max(heroe["id"] for heroe in superheroes)
     superheroes.append(new_heroe)
     response = jsonify(new_heroe)
     response.headers.add('Access-Control-Allow-Origin', '*')
