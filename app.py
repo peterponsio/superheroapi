@@ -3,7 +3,7 @@ from flask_cors import CORS, cross_origin # type: ignore
 import os
 
 app = Flask(__name__)
-CORS(app, support_credentials=True))  
+CORS(app, support_credentials=True)  
 
 superheroes = [
   {
