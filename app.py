@@ -112,8 +112,9 @@ def create_superheroe():
     return response, 201
 
 # Ruta para actualizar un superhéroe existente
-@app.route('/superheroes/<int:id>', methods=['PUT'])
+@app.route('/superheroes/<int:id>', methods=['PUT','OPTIONS'])
 #@cross_origin(origin='localhost',headers=['Content-Type'])
+@crossdomain(origin='*')
 def update_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
     if heroe:
@@ -121,7 +122,7 @@ def update_superheroe(id):
         heroe.update(data)
         response = jsonify(heroe)
         response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+        return response, 200, {'Access-Control-Allow-Origin':'*'}
     return ('', 404)
 
 # Ruta para borrar un superhéroe
