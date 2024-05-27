@@ -96,10 +96,10 @@ def get_superheroes():
     return response
 
 # Ruta para obtener un superhéroe por ID
-@app.route('/superheroes/<int:id>', methods=['GET'])
+@app.route('/superheroes/<id>', methods=['GET'])
 def get_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
-    return jsonify(heroe) if heroe else ('', 404)
+    return if heroe jsonify(heroe) else ('Hero Not Found', 404)
 
 # Ruta para crear un nuevo superhéroe
 @app.route('/superheroes', methods=['POST'])
