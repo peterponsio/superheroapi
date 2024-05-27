@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS # type: ignore
+from flask_cors import CORS, cross_origin
 import os
 
 app = Flask(__name__)
@@ -113,6 +113,7 @@ def create_superheroe():
 
 # Ruta para actualizar un superhéroe existente
 @app.route('/superheroes/<int:id>', methods=['PUT','OPTIONS'])
+@cross_origin()
 def update_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
     if heroe:
