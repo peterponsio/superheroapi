@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS # type: ignore
+from flask_cors import CORS, cross_origin # type: ignore
 import os
 
 app = Flask(__name__)
 CORS(app)  
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 superheroes = [
   {
@@ -87,6 +88,9 @@ superheroes = [
     "id": "10"
   }
 ]
+
+@app.route("/")
+@cross_origin()
 
 # Ruta para obtener todos los superhéroes
 @app.route('/superheroes', methods=['GET'])
