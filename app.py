@@ -112,15 +112,40 @@ def create_superheroe():
     return response, 201
 
 # Ruta para actualizar un superhéroe existente
-@app.route('/superheroes/<id>', methods=['PUT'])
-def update_superheroe(id):
-    heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
-    if heroe:
-        data = request.json
-        heroe.update(data)
-        response = jsonify(heroe)
-        return response
-    return ('', 404)
+@app.route('/superheroes/edit', methods=['POST'])
+def edit_superhero():
+    data = request.json
+    id = data.get('id')
+    name = data.get('name')
+    power = data.get('power')
+    height = data.get('height')
+    avatar = data.get('avatar')
+  
+    if not id:
+        return jsonify({"error": "ID del superhéroe es requerido"}), 400
+
+    updated_superhero = {}
+    if name:
+        updated_superhero['name'] = name
+    if power:
+        updated_superhero['power'] = power
+    if height:
+        updated_superhero['height'] = height
+    if avatar:
+        updated_superhero['avatar'] = avatar
+
+    if not updated_superhero:
+        return jsonify({"error": "No hay campos para actualizar"}), 400
+
+    result = superheroes_collection.update_one(
+        {"_id": ObjectId(id)},
+        {"$set": updated_superhero}
+    )
+
+    if result.matched_count == 0:
+        return jsonify({"error": "Superhéroe no encontrado"}), 404
+
+    return jsonify({"msg": "Superhéroe actualizado correctamente"}), 200
 
 # Ruta para borrar un superhéroe
 @app.route('/superheroes/<int:id>', methods=['DELETE'])
