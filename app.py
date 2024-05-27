@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin # type: ignore
+from flask_cors import CORS # type: ignore
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
+CORS(app, resources={r"/superheroes": {"origins": "http://localhost:4200"}})
 
 superheroes = [
   {
@@ -113,7 +113,7 @@ def create_superheroe():
 
 # Ruta para actualizar un superhéroe existente
 @app.route('/superheroes/<int:id>', methods=['PUT'])
-@cross_origin(origin='localhost',headers=['Content- Type'])
+#@cross_origin(origin='localhost',headers=['Content-Type'])
 def update_superheroe(id):
     heroe = next((heroe for heroe in superheroes if heroe["id"] == id), None)
     if heroe:
